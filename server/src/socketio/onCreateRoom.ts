@@ -2,7 +2,6 @@ import { sessionManager } from '../SessionManager';
 // import { v4 as uuid } from 'uuid';
 import { MessageType, SocketIOHandler } from '../types';
 export const onCreateRoom: SocketIOHandler = async (_, socket) => {
-  //   const roomId = uuid();
   const roomId = 'test';
   console.log(`[${roomId}] Creating room`);
 

@@ -9,10 +9,8 @@ export class GameManager {
   constructor() {
     this.update = this.update.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
-    // this.onRoomJoined = this.onRoomJoined.bind(this);
-    // this.onRoomCreated = this.onRoomCreated.bind(this);
     this.initialize = this.initialize.bind(this);
-    this.socket = io('ws://localhost:3002', {
+    this.socket = io('http://localhost:3002', {
       reconnectionDelayMax: 10000,
       autoConnect: true,
       query: {
@@ -26,6 +24,9 @@ export class GameManager {
     this.socket.on('ROOM_CREATED', this.initialize);
     this.socket.on('ROOM_JOINED', this.initialize);
     this.socket.on('UPDATE', this.onUpdate);
+    this.socket.on('ERROR', (err) => {
+      console.error(err);
+    });
   }
 
   onUpdate(data: { cells: Cell[]; members: Member[] }) {
@@ -36,15 +37,6 @@ export class GameManager {
     writeBoard(data.cells);
     drawCursors(data.members);
   }
-
-  //   onRoomCreated(data: { roomId: string }) {
-  //     console.log('created room');
-  //     this.roomId = data.roomId;
-  //     // artifical delay  to allow the dom to update before sending to the server
-  //     document.addEventListener('keydown', () => setTimeout(this.update, 200));
-  //     document.addEventListener('mousedown', () => setTimeout(this.update, 300));
-  //     this.initialized = true;
-  //   }
 
   initialize(data: { roomId: string; cells: Cell[]; members: Member[] }) {
     console.log('joined room');
@@ -104,6 +96,7 @@ function readCell(index: number) {
   if (!cellText) {
     return null;
   }
+  if (!cellText.childNodes[1]) return null;
   return {
     value: cellText.childNodes[1].textContent,
     index,
@@ -140,7 +133,7 @@ function getCursorCellIndex() {
   const cells = board.querySelectorAll('rect');
   for (let i = 0; i < cells.length; i++) {
     const cell = cells[i];
-    if (cell.getAttribute('class')?.includes('Cell-selected')) {
+    if (cell.getAttribute('class')?.includes('cell--selected')) {
       return i;
     }
   }
@@ -192,7 +185,9 @@ export function printCells(cells: Cell[]) {
 }
 
 function drawCursors(members: Member[]) {
+  console.log('drawing cursors');
   const board = getBoard();
+  console.log('board', board);
   if (!board) return null;
   for (let i = 0; i < board.children.length; i++) {
     const cell = board.children[i];
@@ -201,6 +196,7 @@ function drawCursors(members: Member[]) {
     }
   }
   members.forEach((member) => {
+    console.log({ member });
     const cell = document.getElementById(`cell-id-${member.cursorIndex}`);
     if (cell) {
       console.log({ member });

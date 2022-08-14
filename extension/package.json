@@ -1,11 +1,11 @@
 {
-  "name": "chrome-extension-boilerplate-react",
+  "name": "crossword-party",
   "version": "4.2.0",
-  "description": "A chrome extension boilerplate built with React 17, Webpack 5, and Webpack Dev Server 4",
+  "description": "Allows multiple people to work on the same New York Times Crossword",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lxieyang/chrome-extension-boilerplate-react.git"
+    "url": "https://github.com/qscacheri/crossword-party.git"
   },
   "scripts": {
     "build": "node utils/build.js",
@@ -25,6 +25,7 @@
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
     "@types/chrome": "^0.0.164",
+    "@types/node": "^18.7.3",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "babel-eslint": "^10.1.0",
