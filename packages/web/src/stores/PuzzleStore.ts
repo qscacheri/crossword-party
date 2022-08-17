@@ -1,3 +1,4 @@
+import { browser } from '$app/env';
 import type { LoadEvent } from '@sveltejs/kit';
 import { Map } from 'immutable';
 import io, { Socket } from 'socket.io-client';
@@ -41,7 +42,8 @@ export class PuzzleStore {
 	store: Writable<PuzzleStoreType>;
 
 	constructor() {
-		const endpoint = 'http://localhost:3002';
+		// const endpoint = 'http://localhost:3002';
+		const endpoint = 'https://0890b5f000a2.ngrok.io';
 		this.socket = io(endpoint, {
 			reconnectionDelayMax: 10000,
 			autoConnect: true
@@ -437,5 +439,5 @@ export const pstore = new PuzzleStore();
 
 pstore.subscribe(({ puzzle, guesses }) => {
 	if (!puzzle) return;
-	localStorage.setItem(`puzzle-${puzzle.publicationDate}`, JSON.stringify(guesses));
+	if (browser) localStorage.setItem(`puzzle-${puzzle.publicationDate}`, JSON.stringify(guesses));
 });

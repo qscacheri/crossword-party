@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#app-container {
+  height: 100%;
+  width: 100%;
+}
+
+.button {
+  background: black;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.button:hover {
+  background: #4f4f4f;
+}
+
+.container {
+  padding: 2rem;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type='text'] {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: 2px solid black;
+}
+
+.row {
+  gap: 1rem;
+  justify-content: flex-start;
+  display: flex;
+}
+
+.or {
+  margin: 2rem 0;
+}
+
+.created-room {
+  border: 2px solid black;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.created-room > p {
+  display: flex;
+  align-items: center;
+}

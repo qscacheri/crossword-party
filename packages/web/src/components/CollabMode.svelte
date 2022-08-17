@@ -13,13 +13,13 @@
 			<button on:click={() => pstore.createRoom()} class="btn-primary"> Create Room </button>
 			<p>or</p>
 			<div class="flex w-full items-center gap-2">
+				<div><input class="self-start text-field" type="text" bind:value={joinRoomText} /></div>
 				<div>
 					<button
 						class="btn-primary items-center self-start"
 						on:click={() => pstore.joinRoom(joinRoomText)}>Join Room</button
 					>
 				</div>
-				<div><input class="self-start text-field" type="text" bind:value={joinRoomText} /></div>
 			</div>
 		</div>
 		<div
